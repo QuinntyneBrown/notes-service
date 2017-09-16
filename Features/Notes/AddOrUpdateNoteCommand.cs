@@ -38,7 +38,10 @@ namespace NotesService.Features.Notes
                     var tenant = await _context.Tenants.SingleAsync(x => x.UniqueId == request.TenantUniqueId);
                     var existingNote = await _context.Notes.SingleOrDefaultAsync(x => x.Title == request.Note.Title && x.CreatedBy == request.Username);
 
-                    if (existingNote != null) throw new Exception("Note Exists");
+                    if (existingNote != null)
+                    {
+                        _bus.Publish(new AddedOrUpdatedNoteMessage(entity, request.CorrelationId, request.TenantUniqueId));                        
+                    }
 
                     _context.Notes.Add(entity = new Note() { TenantId = tenant.Id });
                 }
@@ -51,7 +54,7 @@ namespace NotesService.Features.Notes
 
                 await _context.SaveChangesAsync(request.Username);
 
-                _bus.Publish(new AddedOrUpdatedNoteMessage(entity, request.CorrelationId, request.TenantUniqueId));
+                _bus.Publish(new AddedOrUpdatedNoteMessage(NoteApiModel.FromNote(entity), request.CorrelationId, request.TenantUniqueId));
 
                 return new Response();
             }

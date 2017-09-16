@@ -51,9 +51,10 @@ namespace NotesService.Data
                 .Where(e => e.Entity is ILoggable && ((e.State == EntityState.Added || (e.State == EntityState.Modified))))
                 .Select(x => x.Entity as ILoggable))
             {
-                entity.CreatedOn = entity.CreatedOn == default(DateTime) ? DateTime.UtcNow : entity.CreatedOn;
+                var isNew = entity.CreatedOn == default(DateTime);
+                entity.CreatedOn = isNew ? DateTime.UtcNow : entity.CreatedOn;
                 entity.LastModifiedOn = DateTime.UtcNow;
-                entity.CreatedBy = entity.CreatedOn == default(DateTime) ? username : entity.CreatedBy;
+                entity.CreatedBy = isNew ? username : entity.CreatedBy;
                 entity.LastModifiedBy = username;
             }
         }

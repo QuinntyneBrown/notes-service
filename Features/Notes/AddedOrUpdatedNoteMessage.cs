@@ -7,7 +7,7 @@ namespace NotesService.Features.Notes
 
     public class AddedOrUpdatedNoteMessage : BaseEventBusMessage
     {
-        public AddedOrUpdatedNoteMessage(Note note, Guid correlationId, Guid tenantId)
+        public AddedOrUpdatedNoteMessage(dynamic note, Guid correlationId, Guid tenantId)
         {
             Payload = new { Entity = note, CorrelationId = correlationId };
             TenantUniqueId = tenantId;
