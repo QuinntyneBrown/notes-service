@@ -9,6 +9,7 @@ namespace NotesService.Features.Notes
         public string Name { get; set; }
         public string Title { get; set; }
         public string Body { get; set; }
+        public string Slug { get; set; }
 
         public static TModel FromNote<TModel>(Note note) where
             TModel : NoteApiModel, new()
@@ -18,6 +19,7 @@ namespace NotesService.Features.Notes
             model.TenantId = note.TenantId;
             model.Title = note.Title;
             model.Body = note.Body;
+            model.Slug = note.Slug;
             return model;
         }
 

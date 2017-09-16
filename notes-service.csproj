@@ -327,6 +327,8 @@
     <Content Include="ClientApp\styles\left-nav.css" />
     <Content Include="ClientApp\styles\list-item.css" />
     <Content Include="ClientApp\styles\list.css" />
+    <Content Include="dist\app.js" />
+    <Content Include="dist\vendor.js" />
     <Content Include="index.html" />
     <Content Include="libs\jquery.js" />
     <Content Include="libs\jquery.signalR-2.2.1.js" />
@@ -410,6 +412,8 @@
     <Compile Include="Features\Notes\RemovedNoteMessage.cs" />
     <Compile Include="Features\Notes\NoteApiModel.cs" />
     <Compile Include="Features\Notes\NotesController.cs" />
+    <Compile Include="Features\Notes\GetBySlugAndCurrentUserQuery.cs" />
+    <Compile Include="Features\Notes\GetByCurrentUserQuery.cs" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="packages\AWSSDK.S3.3.3.5.11\analyzers\dotnet\cs\AWSSDK.S3.CodeAnalysis.dll" />

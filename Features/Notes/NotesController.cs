@@ -24,12 +24,22 @@ namespace NotesService.Features.Notes
         [HttpPut]
         [ResponseType(typeof(AddOrUpdateNoteCommand.Response))]
         public async Task<IHttpActionResult> Update(AddOrUpdateNoteCommand.Request request) => Ok(await Send(request));
-        
+
         [Route("get")]
-        [AllowAnonymous]
         [HttpGet]
         [ResponseType(typeof(GetNotesQuery.Response))]
         public async Task<IHttpActionResult> Get() => Ok(await Send(new GetNotesQuery.Request()));
+
+        [Route("getBySlugAndCurrentUser")]
+        [HttpGet]
+        [ResponseType(typeof(GetBySlugAndCurrentUserQuery.Response))]
+        public async Task<IHttpActionResult> GetBySlugAndCurrentUser([FromUri]GetBySlugAndCurrentUserQuery.Request request) => Ok(await Send(request));
+
+        [Route("getByCurrentUserQuery")]
+        [HttpGet]
+        [ResponseType(typeof(GetByCurrentUserQuery.Response))]
+        public async Task<IHttpActionResult> GetByCurrentUserQuery() => Ok(await Send(new GetByCurrentUserQuery.Request()));
+
 
         [Route("getById")]
         [HttpGet]

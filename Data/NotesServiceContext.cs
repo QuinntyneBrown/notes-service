@@ -12,7 +12,7 @@ namespace NotesService.Data
     {
         DbSet<Tenant> Tenants { get; set; }        
         DbSet<Note> Notes { get; set; }
-        Task<int> SaveChangesAsync();
+        Task<int> SaveChangesAsync(string username = null);
     }
     
     public class NotesServiceContext: DbContext, INotesServiceContext
@@ -28,19 +28,24 @@ namespace NotesService.Data
         public DbSet<Tenant> Tenants { get; set; }
         public DbSet<Note> Notes { get; set; }
 
-        public override int SaveChanges()
+
+        public int SaveChanges(string username)
         {
-            UpdateLoggableEntries();
+            UpdateLoggableEntries(username);
             return base.SaveChanges();
         }
 
-        public override Task<int> SaveChangesAsync()
+        public Task<int> SaveChangesAsync(string username)
         {
-            UpdateLoggableEntries();
+            UpdateLoggableEntries(username);
             return base.SaveChangesAsync();
         }
 
-        public void UpdateLoggableEntries()
+        public override int SaveChanges() => this.SaveChanges(null);
+
+        public override Task<int> SaveChangesAsync() => this.SaveChangesAsync(null);
+
+        public void UpdateLoggableEntries(string username = null)
         {
             foreach (var entity in ChangeTracker.Entries()
                 .Where(e => e.Entity is ILoggable && ((e.State == EntityState.Added || (e.State == EntityState.Modified))))
@@ -48,6 +53,8 @@ namespace NotesService.Data
             {
                 entity.CreatedOn = entity.CreatedOn == default(DateTime) ? DateTime.UtcNow : entity.CreatedOn;
                 entity.LastModifiedOn = DateTime.UtcNow;
+                entity.CreatedBy = entity.CreatedOn == default(DateTime) ? username : entity.CreatedBy;
+                entity.LastModifiedBy = username;
             }
         }
 

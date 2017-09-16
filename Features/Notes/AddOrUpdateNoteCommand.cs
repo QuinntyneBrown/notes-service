@@ -12,7 +12,7 @@ namespace NotesService.Features.Notes
 {
     public class AddOrUpdateNoteCommand
     {
-        public class Request : BaseRequest, IRequest<Response>
+        public class Request : BaseAuthenticatedRequest, IRequest<Response>
         {
             public NoteApiModel Note { get; set; }            
 			public Guid CorrelationId { get; set; }
@@ -43,7 +43,9 @@ namespace NotesService.Features.Notes
 
                 entity.Body = request.Note.Body;
 
-                await _context.SaveChangesAsync();
+                entity.Slug = request.Note.Title.GenerateSlug();
+
+                await _context.SaveChangesAsync(request.Username);
 
                 _bus.Publish(new AddedOrUpdatedNoteMessage(entity, request.CorrelationId, request.TenantUniqueId));
 
