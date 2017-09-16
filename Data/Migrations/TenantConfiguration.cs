@@ -12,7 +12,7 @@ namespace NotesService.Migrations
             context.Tenants.AddOrUpdate(x => x.Name, new Tenant()
             {
                 Name = "Default",
-                UniqueId = new Guid("489902a0-a39d-4556-94b4-544d33d5ff5b")
+                UniqueId = new Guid("196ce9e2-3107-475f-9c1c-7fa13b534eb1")
             });
 
             context.SaveChanges();

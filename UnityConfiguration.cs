@@ -30,6 +30,8 @@ namespace NotesService
                 }));
 
 
+            container.RegisterType<Features.Notes.INotesEventBusMessageHandler, Features.Notes.NotesEventBusMessageHandler>();
+
             return container;
         }
     }

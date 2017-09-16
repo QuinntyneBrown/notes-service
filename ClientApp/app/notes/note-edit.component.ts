@@ -36,12 +36,14 @@ export class NoteEditComponent {
 
         this.form.patchValue({
             id: this._note.id,
-            name: this._note.name,
+            title: this._note.title,
+            body: this._note.body
         });
     }
    
     public form = new FormGroup({
         id: new FormControl(0, []),
-        name: new FormControl('', [Validators.required])
+        title: new FormControl('', [Validators.required]),
+        body: new FormControl('')
     });
 }

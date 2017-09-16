@@ -14,7 +14,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>NotesService</RootNamespace>
-    <AssemblyName>notes-service</AssemblyName>
+    <AssemblyName>NotesService</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
@@ -324,6 +324,7 @@
     <Content Include="ClientApp\app\users\login.component.html" />
     <Content Include="ClientApp\styles\edit.css" />
     <Content Include="ClientApp\styles\forms.css" />
+    <Content Include="ClientApp\styles\left-nav.css" />
     <Content Include="ClientApp\styles\list-item.css" />
     <Content Include="ClientApp\styles\list.css" />
     <Content Include="index.html" />
@@ -416,9 +417,7 @@
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Properties\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\app\app.component.ts">
       <DependentUpon>app.component.html</DependentUpon>
@@ -533,6 +532,10 @@
     <TypeScriptCompile Include="ClientApp\app\notes\note.model.ts" />
     <TypeScriptCompile Include="ClientApp\app\notes\notes.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\notes\notes.module.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\PublishProfiles\notes-service - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\notes-service - Web Deploy.pubxml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

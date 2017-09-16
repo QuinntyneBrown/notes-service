@@ -18,6 +18,7 @@ import { NoteEditPageComponent } from "./note-edit-page.component";
 import { NoteListItemComponent } from "./note-list-item.component";
 import { NotePaginatedListComponent } from "./note-paginated-list.component";
 import { NotePaginatedListPageComponent } from "./note-paginated-list-page.component";
+import { NotesLeftNavComponent } from "./notes-left-nav.component";
 
 export const NOTE_ROUTES: Routes = [{
     path: 'notes',
@@ -55,7 +56,8 @@ const declarables = [
     NoteEditPageComponent,
     NoteListItemComponent,
     NotePaginatedListComponent,
-    NotePaginatedListPageComponent
+    NotePaginatedListPageComponent,
+    NotesLeftNavComponent
 ];
 
 const providers = [NotesService];

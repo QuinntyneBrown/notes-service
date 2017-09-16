@@ -11,6 +11,7 @@ using System;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Microsoft.AspNet.SignalR;
+using NotesService.Features.Notes;
 
 [assembly: OwinStartup(typeof(NotesService.Startup))]
 
@@ -27,30 +28,31 @@ namespace NotesService
                 ApiConfiguration.Install(config, app);
 
 
-                //var client = SubscriptionClient.CreateFromConnectionString(CoreConfiguration.Config.EventQueueConnectionString, CoreConfiguration.Config.TopicName, CoreConfiguration.Config.SubscriptionName);
+                var client = SubscriptionClient.CreateFromConnectionString(CoreConfiguration.Config.EventQueueConnectionString, CoreConfiguration.Config.TopicName, CoreConfiguration.Config.SubscriptionName);
+                var notesEventBusMessageHandler = container.Resolve<INotesEventBusMessageHandler>();
 
-                //client.OnMessage(message =>
-                //{
-                //    try
-                //    {
-                //        var messageBody = ((BrokeredMessage)message).GetBody<string>();
-                //        var messageBodyObject = DeserializeObject<JObject>(messageBody, new JsonSerializerSettings
-                //        {
-                //            ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
-                //            PreserveReferencesHandling = PreserveReferencesHandling.Objects,
-                //            TypeNameHandling = TypeNameHandling.All,
-                //            ContractResolver= new CamelCasePropertyNamesContractResolver()                            
-                //        });
+                client.OnMessage(message =>
+                {
+                    try
+                    {
+                        var messageBody = ((BrokeredMessage)message).GetBody<string>();
+                        var messageBodyObject = DeserializeObject<JObject>(messageBody, new JsonSerializerSettings
+                        {
+                            ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
+                            PreserveReferencesHandling = PreserveReferencesHandling.Objects,
+                            TypeNameHandling = TypeNameHandling.All,
+                            ContractResolver = new CamelCasePropertyNamesContractResolver()
+                        });
 
-                //        Add Handlers Here
+                        notesEventBusMessageHandler.Handle(messageBodyObject);
 
-                //        GlobalHost.ConnectionManager.GetHubContext<EventHub>().Clients.All.events(messageBodyObject);
-                //    }
-                //    catch (Exception e)
-                //    {
+                        GlobalHost.ConnectionManager.GetHubContext<EventHub>().Clients.All.events(messageBodyObject);
+                    }
+                    catch (Exception e)
+                    {
 
-                //    }
-                //});
+                    }
+                });
             });
         }
     }
