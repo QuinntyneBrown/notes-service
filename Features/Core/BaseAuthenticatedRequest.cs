@@ -8,13 +8,13 @@ namespace NotesService.Features.Core
     {
         public ClaimsPrincipal ClaimsPrincipal { get; set; }
 
-        public new Guid TenantUniqueId
-        {
-            get
-            {
-                return new Guid(ClaimsPrincipal?.Claims.Single(x => x.Type == Core.ClaimTypes.TenantUniqueId).Value);
-            }
-        }
+        //public new Guid TenantUniqueId
+        //{
+        //    get
+        //    {
+        //        return new Guid(ClaimsPrincipal?.Claims.Single(x => x.Type == Core.ClaimTypes.TenantUniqueId).Value);
+        //    }
+        //}
 
         public string Username
         {

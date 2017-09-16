@@ -414,6 +414,7 @@
     <Compile Include="Features\Notes\NotesController.cs" />
     <Compile Include="Features\Notes\GetBySlugAndCurrentUserQuery.cs" />
     <Compile Include="Features\Notes\GetByCurrentUserQuery.cs" />
+    <Compile Include="Features\Notes\GetByUsernameAndTitleQuery.cs" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="packages\AWSSDK.S3.3.3.5.11\analyzers\dotnet\cs\AWSSDK.S3.CodeAnalysis.dll" />

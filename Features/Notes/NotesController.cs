@@ -18,7 +18,9 @@ namespace NotesService.Features.Notes
         [Route("add")]
         [HttpPost]
         [ResponseType(typeof(AddOrUpdateNoteCommand.Response))]
-        public async Task<IHttpActionResult> Add(AddOrUpdateNoteCommand.Request request) => Ok(await Send(request));
+        public async Task<IHttpActionResult> Add(AddOrUpdateNoteCommand.Request request) {
+            return Ok(await Send(request));
+        }
 
         [Route("update")]
         [HttpPut]
@@ -35,7 +37,12 @@ namespace NotesService.Features.Notes
         [ResponseType(typeof(GetBySlugAndCurrentUserQuery.Response))]
         public async Task<IHttpActionResult> GetBySlugAndCurrentUser([FromUri]GetBySlugAndCurrentUserQuery.Request request) => Ok(await Send(request));
 
-        [Route("getByCurrentUserQuery")]
+        [Route("getByTitleAndCurrentUser")]
+        [HttpGet]
+        [ResponseType(typeof(GetByTitleAndCurrentUserQuery.Response))]
+        public async Task<IHttpActionResult> GetByTitleAndCurrentUserQuery([FromUri]GetByTitleAndCurrentUserQuery.Request request) => Ok(await Send(request));
+
+        [Route("getByCurrentUser")]
         [HttpGet]
         [ResponseType(typeof(GetByCurrentUserQuery.Response))]
         public async Task<IHttpActionResult> GetByCurrentUserQuery() => Ok(await Send(new GetByCurrentUserQuery.Request()));

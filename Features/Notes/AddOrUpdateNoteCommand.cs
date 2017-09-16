@@ -36,6 +36,10 @@ namespace NotesService.Features.Notes
                 
                 if (entity == null) {
                     var tenant = await _context.Tenants.SingleAsync(x => x.UniqueId == request.TenantUniqueId);
+                    var existingNote = await _context.Notes.SingleOrDefaultAsync(x => x.Title == request.Note.Title && x.CreatedBy == request.Username);
+
+                    if (existingNote != null) throw new Exception("Note Exists");
+
                     _context.Notes.Add(entity = new Note() { TenantId = tenant.Id });
                 }
 
