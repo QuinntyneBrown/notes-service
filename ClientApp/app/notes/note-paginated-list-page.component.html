@@ -1,0 +1,5 @@
+<ce-note-paginated-list [notes]="notes"                           
+                           (delete)="tryToDelete($event)"
+                           (edit)="tryToEdit($event)"
+                           (filterKeyUp)="handleNotesFilterKeyUp($event)">
+</ce-note-paginated-list>
