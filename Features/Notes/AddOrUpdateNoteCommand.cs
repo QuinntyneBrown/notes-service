@@ -40,7 +40,8 @@ namespace NotesService.Features.Notes
 
                     if (existingNote != null)
                     {
-                        _bus.Publish(new AddedOrUpdatedNoteMessage(entity, request.CorrelationId, request.TenantUniqueId));                        
+                        _bus.Publish(new AddedOrUpdatedNoteMessage(entity, request.CorrelationId, request.TenantUniqueId));
+                        return new Response();
                     }
 
                     _context.Notes.Add(entity = new Note() { TenantId = tenant.Id });

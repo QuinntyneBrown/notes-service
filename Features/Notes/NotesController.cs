@@ -12,14 +12,17 @@ namespace NotesService.Features.Notes
     [RoutePrefix("api/notes")]
     public class NoteController : BaseApiController
     {
-        public NoteController(IMediator mediator)
-            :base(mediator) { }
+        public NoteController(IMediator mediator, IEventBus bus)
+            :base(mediator) {
+            _bus = bus;
+        }
 
         [Route("add")]
         [HttpPost]
-        [ResponseType(typeof(AddOrUpdateNoteCommand.Response))]
-        public async Task<IHttpActionResult> Add(AddOrUpdateNoteCommand.Request request) {
-            return Ok(await Send(request));
+        [ResponseType(typeof(void))]
+        public IHttpActionResult Add(AddOrUpdateNoteCommand.Request request) {
+            _bus.Publish(new TryToAddOrUpdateNoteMessage(request, request.CorrelationId, TenantUniqueId, User.Identity.Name));
+            return Ok();
         }
 
         [Route("update")]
@@ -58,5 +61,6 @@ namespace NotesService.Features.Notes
         [ResponseType(typeof(RemoveNoteCommand.Response))]
         public async Task<IHttpActionResult> Remove([FromUri]RemoveNoteCommand.Request request) => Ok(await Send(request));
 
+        private IEventBus _bus { get; set; }
     }
 }

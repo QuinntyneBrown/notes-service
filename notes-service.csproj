@@ -6,8 +6,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>
-    </ProductVersion>
+    <ProductVersion></ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{2250BEF5-1F73-47F6-8C6C-8FFBFC22F496}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
@@ -22,8 +21,7 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
+    <NuGetPackageImportStamp></NuGetPackageImportStamp>
     <TypeScriptToolsVersion>2.4</TypeScriptToolsVersion>
     <TypeScriptEmitDecoratorMetadata>true</TypeScriptEmitDecoratorMetadata>
     <TypeScriptModuleKind>commonjs</TypeScriptModuleKind>
@@ -367,6 +365,7 @@
     <Compile Include="Features\Core\BaseAuthenticatedRequest.cs" />
     <Compile Include="Features\Core\ClaimTypes.cs" />
     <Compile Include="Features\Notes\AddedOrUpdatedNoteFailedMessage.cs" />
+    <Compile Include="Features\Notes\TryToAddOrUpdateNoteMessage.cs" />
     <Compile Include="Model\ILoggable.cs" />
     <Compile Include="Model\Tenant.cs" />
     <Compile Include="Features\Core\BaseApiController.cs" />
@@ -416,6 +415,8 @@
     <Compile Include="Features\Notes\GetBySlugAndCurrentUserQuery.cs" />
     <Compile Include="Features\Notes\GetByCurrentUserQuery.cs" />
     <Compile Include="Features\Notes\GetByUsernameAndTitleQuery.cs" />
+    <Compile Include="Features\Notes\TryToAddOrUpdateNoteCommand.cs" />
+    <Compile Include="Data\Migrations\NoteConfiguration.cs" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="packages\AWSSDK.S3.3.3.5.11\analyzers\dotnet\cs\AWSSDK.S3.CodeAnalysis.dll" />
@@ -562,8 +563,7 @@
           <IISUrl>http://localhost:58691/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
-          <CustomServerUrl>
-          </CustomServerUrl>
+          <CustomServerUrl></CustomServerUrl>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>

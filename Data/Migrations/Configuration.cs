@@ -2,6 +2,7 @@ namespace NotesService.Migrations
 {
     using Data;
     using Data.Helpers;
+    using NotesService.Data.Migrations;
     using System.Data.Entity.Migrations;
 
     internal sealed class Configuration : DbMigrationsConfiguration<NotesServiceContext>
@@ -12,8 +13,9 @@ namespace NotesService.Migrations
         }
 
         protected override void Seed(NotesServiceContext context)
-        {
+        {            
             TenantConfiguration.Seed(context);
+            NoteConfiguration.Seed(context);
         }
     }
 

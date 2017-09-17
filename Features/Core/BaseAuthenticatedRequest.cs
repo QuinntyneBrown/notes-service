@@ -16,9 +16,20 @@ namespace NotesService.Features.Core
         //    }
         //}
 
+        private string _username;
+
         public string Username
         {
-            get { return ClaimsPrincipal?.Identity.Name; }        
+            get {
+                if(string.IsNullOrEmpty(_username))
+                    return ClaimsPrincipal?.Identity.Name;
+
+                return _username;
+            }  
+
+            set { _username = value; }
         }
+
+        
     }
 }
