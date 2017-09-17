@@ -30,12 +30,12 @@ namespace NotesService.Features.Notes
             }
 
             public async Task<Response> Handle(Request request)
-            {
-                var note = await _context.Notes.Where(x => 
+            {                
+                var note = await _context.Notes.Include(x=>x.Tenant).Where(x => 
                 x.CreatedBy == request.Username
-                && x.Slug == x.Slug
+                && x.Slug == request.Slug
                 && x.Tenant.UniqueId == request.TenantUniqueId).SingleAsync();
-
+                
                 return new Response()
                 {
                     Note = NoteApiModel.FromNote(note)
