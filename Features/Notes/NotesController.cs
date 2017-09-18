@@ -20,15 +20,12 @@ namespace NotesService.Features.Notes
         [Route("add")]
         [HttpPost]
         [ResponseType(typeof(void))]
-        public IHttpActionResult Add(AddOrUpdateNoteCommand.Request request) {
-            _bus.Publish(new TryToAddOrUpdateNoteMessage(request, request.CorrelationId, TenantUniqueId, User.Identity.Name));
-            return Ok();
-        }
+        public IHttpActionResult Add(TryToAddOrUpdateNoteCommand.Request request) => Ok(Send(request));
 
         [Route("update")]
         [HttpPut]
-        [ResponseType(typeof(AddOrUpdateNoteCommand.Response))]
-        public async Task<IHttpActionResult> Update(AddOrUpdateNoteCommand.Request request) => Ok(await Send(request));
+        [ResponseType(typeof(void))]
+        public IHttpActionResult Update(TryToAddOrUpdateNoteCommand.Request request) => Ok(Send(request));
 
         [Route("get")]
         [HttpGet]

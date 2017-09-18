@@ -33,6 +33,8 @@ namespace NotesService.Features.Notes
                 return new Response()
                 {
                     Note = NoteApiModel.FromNote(await _context.Notes
+                    .Include(x => x.NoteTags)
+                    .Include("NoteTags.Tag")
                     .Include(x => x.Tenant)				
 					.SingleAsync(x=>x.Id == request.Id &&  x.Tenant.UniqueId == request.TenantUniqueId))
                 };

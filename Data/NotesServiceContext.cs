@@ -12,6 +12,8 @@ namespace NotesService.Data
     {
         DbSet<Tenant> Tenants { get; set; }        
         DbSet<Note> Notes { get; set; }
+        DbSet<Tag> Tags { get; set; }
+
         Task<int> SaveChangesAsync(string username = null);
     }
     
@@ -27,7 +29,7 @@ namespace NotesService.Data
 
         public DbSet<Tenant> Tenants { get; set; }
         public DbSet<Note> Notes { get; set; }
-
+        public DbSet<Tag> Tags { get; set; }
 
         public int SaveChanges(string username)
         {

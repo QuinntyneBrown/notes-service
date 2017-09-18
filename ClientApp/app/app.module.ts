@@ -8,6 +8,7 @@ import {FormsModule} from '@angular/forms';
 import {HomeModule} from "../app/home/home.module";
 import {NotesModule} from "../app/notes/notes.module";
 import {SharedModule} from "../app/shared";
+import {TagsModule} from "../app/tags/tags.module";
 import {UsersModule} from "../app/users/users.module";
 import {TenantsModule} from "../app/tenants/tenants.module";
 
@@ -32,6 +33,7 @@ const providers = [];
 
         HomeModule,
         SharedModule,
+        TagsModule,
         NotesModule,
         TenantsModule,
         UsersModule

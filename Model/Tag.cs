@@ -9,18 +9,17 @@ using static NotesService.Constants;
 namespace NotesService.Model
 {
     [SoftDelete("IsDeleted")]
-    public class Note: ILoggable
+    public class Tag: ILoggable
     {
         public int Id { get; set; }
         
 		[ForeignKey("Tenant")]
         public int? TenantId { get; set; }
         
-        public string Title { get; set; }
-
-        public string Slug { get; set; }
-
-        public string Body { get; set; }
+		[Index("TagNameIndex", IsUnique = false)]
+        [Column(TypeName = "VARCHAR")]     
+        [StringLength(MaxStringLength)]		   
+		public string Name { get; set; }
 
         public ICollection<NoteTag> NoteTags { get; set; } = new HashSet<NoteTag>();
 

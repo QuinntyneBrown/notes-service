@@ -9,22 +9,20 @@ using static NotesService.Constants;
 namespace NotesService.Model
 {
     [SoftDelete("IsDeleted")]
-    public class Note: ILoggable
+    public class NoteTag: ILoggable
     {
         public int Id { get; set; }
         
 		[ForeignKey("Tenant")]
         public int? TenantId { get; set; }
+
+        [ForeignKey("Note")]
+        public int? NoteId { get; set; }
+
+        [ForeignKey("Tag")]
+        public int? TagId { get; set; }
         
-        public string Title { get; set; }
-
-        public string Slug { get; set; }
-
-        public string Body { get; set; }
-
-        public ICollection<NoteTag> NoteTags { get; set; } = new HashSet<NoteTag>();
-
-        public DateTime CreatedOn { get; set; }
+		public DateTime CreatedOn { get; set; }
         
 		public DateTime LastModifiedOn { get; set; }
         
@@ -35,5 +33,9 @@ namespace NotesService.Model
 		public bool IsDeleted { get; set; }
 
         public virtual Tenant Tenant { get; set; }
+
+        public virtual Note Note { get; set; }
+
+        public virtual Tag Tag { get; set; }
     }
 }

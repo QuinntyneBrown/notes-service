@@ -29,6 +29,8 @@ namespace NotesService.Features.Notes
             public async Task<Response> Handle(Request request)
             {
                 var notes = await _context.Notes
+                    .Include(x => x.NoteTags)
+                    .Include("NoteTags.Tag")
                     .Include(x => x.Tenant)
                     .Where(x => x.Tenant.UniqueId == request.TenantUniqueId )
                     .ToListAsync();

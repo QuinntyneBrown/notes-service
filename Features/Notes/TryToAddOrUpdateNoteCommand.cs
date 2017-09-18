@@ -21,19 +21,23 @@ namespace NotesService.Features.Notes
 
         public class Handler : IAsyncRequestHandler<Request, Response>
         {
-            public Handler(NotesServiceContext context, ICache cache)
+            public Handler(NotesServiceContext context, IEventBus bus)
             {
-                _context = context;
-                _cache = cache;
+                _bus = bus;
             }
 
             public async Task<Response> Handle(Request request)
             {
-                throw new System.NotImplementedException();
-            }
+                var addOrUpdateRequest = new AddOrUpdateNoteCommand.Request();
+                addOrUpdateRequest.Note = request.Note;
+                addOrUpdateRequest.CorrelationId = request.CorrelationId;
+                addOrUpdateRequest.Username = request.Username;
+                _bus.Publish(new TryToAddOrUpdateNoteMessage(addOrUpdateRequest, request.CorrelationId, request.TenantUniqueId, request.Username));
 
-            private readonly NotesServiceContext _context;
-            private readonly ICache _cache;
+                return new Response();
+            }
+            
+            private IEventBus _bus;
         }
 
     }

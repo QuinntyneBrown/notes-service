@@ -6,7 +6,8 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion></ProductVersion>
+    <ProductVersion>
+    </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{2250BEF5-1F73-47F6-8C6C-8FFBFC22F496}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
@@ -21,7 +22,8 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
-    <NuGetPackageImportStamp></NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
     <TypeScriptToolsVersion>2.4</TypeScriptToolsVersion>
     <TypeScriptEmitDecoratorMetadata>true</TypeScriptEmitDecoratorMetadata>
     <TypeScriptModuleKind>commonjs</TypeScriptModuleKind>
@@ -304,6 +306,24 @@
     <Content Include="ClientApp\app\shared\components\tabs.component.css">
       <DependentUpon>tabs.component.html</DependentUpon>
     </Content>
+    <Content Include="ClientApp\app\tags\tag-edit-page.component.css">
+      <DependentUpon>tag-edit-page.component.html</DependentUpon>
+    </Content>
+    <Content Include="ClientApp\app\tags\tag-edit.component.css">
+      <DependentUpon>tag-edit.component.html</DependentUpon>
+    </Content>
+    <Content Include="ClientApp\app\tags\tag-list-item.component.css">
+      <DependentUpon>tag-list-item.component.html</DependentUpon>
+    </Content>
+    <Content Include="ClientApp\app\tags\tag-paginated-list-page.component.css">
+      <DependentUpon>tag-paginated-list-page.component.html</DependentUpon>
+    </Content>
+    <Content Include="ClientApp\app\tags\tag-paginated-list.component.css">
+      <DependentUpon>tag-paginated-list.component.html</DependentUpon>
+    </Content>
+    <Content Include="ClientApp\app\tags\tags-left-nav.component.css">
+      <DependentUpon>tags-left-nav.component.html</DependentUpon>
+    </Content>
     <Content Include="ClientApp\app\tenants\set-tenant-form.component.css">
       <DependentUpon>set-tenant-form.component.html</DependentUpon>
     </Content>
@@ -345,6 +365,12 @@
     <Content Include="ClientApp\app\notes\note-paginated-list-page.component.html" />
     <Content Include="ClientApp\app\notes\note-edit-page.component.html" />
     <Content Include="ClientApp\app\notes\notes-left-nav.component.html" />
+    <Content Include="ClientApp\app\tags\tag-edit.component.html" />
+    <Content Include="ClientApp\app\tags\tag-paginated-list.component.html" />
+    <Content Include="ClientApp\app\tags\tag-list-item.component.html" />
+    <Content Include="ClientApp\app\tags\tag-paginated-list-page.component.html" />
+    <Content Include="ClientApp\app\tags\tag-edit-page.component.html" />
+    <Content Include="ClientApp\app\tags\tags-left-nav.component.html" />
   </ItemGroup>
   <ItemGroup>
     <Content Include=".gitignore" />
@@ -416,7 +442,19 @@
     <Compile Include="Features\Notes\GetByCurrentUserQuery.cs" />
     <Compile Include="Features\Notes\GetByUsernameAndTitleQuery.cs" />
     <Compile Include="Features\Notes\TryToAddOrUpdateNoteCommand.cs" />
-    <Compile Include="Data\Migrations\NoteConfiguration.cs" />
+    <Compile Include="Model\Tag.cs" />
+    <Compile Include="Model\NoteTag.cs" />
+    <Compile Include="Features\Tags\AddOrUpdateTagCommand.cs" />
+    <Compile Include="Features\Tags\GetTagsQuery.cs" />
+    <Compile Include="Features\Tags\GetTagByIdQuery.cs" />
+    <Compile Include="Features\Tags\RemoveTagCommand.cs" />
+    <Compile Include="Features\Tags\TagsCacheKeyFactory.cs" />
+    <Compile Include="Features\Tags\TagsEventBusMessageHandler.cs" />
+    <Compile Include="Features\Tags\TagsEventBusMessages.cs" />
+    <Compile Include="Features\Tags\AddedOrUpdatedTagMessage.cs" />
+    <Compile Include="Features\Tags\RemovedTagMessage.cs" />
+    <Compile Include="Features\Tags\TagApiModel.cs" />
+    <Compile Include="Features\Tags\TagsController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="packages\AWSSDK.S3.3.3.5.11\analyzers\dotnet\cs\AWSSDK.S3.CodeAnalysis.dll" />
@@ -513,6 +551,24 @@
     <TypeScriptCompile Include="ClientApp\app\shared\utilities\pluck-out.ts" />
     <TypeScriptCompile Include="ClientApp\app\shared\utilities\pluck.ts" />
     <TypeScriptCompile Include="ClientApp\app\shared\utilities\translate-xy.ts" />
+    <TypeScriptCompile Include="ClientApp\app\tags\tag-edit-page.component.ts">
+      <DependentUpon>tag-edit-page.component.html</DependentUpon>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\app\tags\tag-edit.component.ts">
+      <DependentUpon>tag-edit.component.html</DependentUpon>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\app\tags\tag-list-item.component.ts">
+      <DependentUpon>tag-list-item.component.html</DependentUpon>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\app\tags\tag-paginated-list-page.component.ts">
+      <DependentUpon>tag-paginated-list-page.component.html</DependentUpon>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\app\tags\tag-paginated-list.component.ts">
+      <DependentUpon>tag-paginated-list.component.html</DependentUpon>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\app\tags\tags-left-nav.component.ts">
+      <DependentUpon>tags-left-nav.component.html</DependentUpon>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\app\tenants\index.ts" />
     <TypeScriptCompile Include="ClientApp\app\tenants\set-tenant-form.component.ts">
       <DependentUpon>set-tenant-form.component.html</DependentUpon>
@@ -539,6 +595,10 @@
     <TypeScriptCompile Include="ClientApp\app\notes\note.model.ts" />
     <TypeScriptCompile Include="ClientApp\app\notes\notes.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\notes\notes.module.ts" />
+    <TypeScriptCompile Include="ClientApp\app\tags\index.ts" />
+    <TypeScriptCompile Include="ClientApp\app\tags\tag.model.ts" />
+    <TypeScriptCompile Include="ClientApp\app\tags\tags.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\tags\tags.module.ts" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\PublishProfiles\notes-service - FTP.pubxml" />
@@ -563,7 +623,8 @@
           <IISUrl>http://localhost:58691/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
-          <CustomServerUrl></CustomServerUrl>
+          <CustomServerUrl>
+          </CustomServerUrl>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>

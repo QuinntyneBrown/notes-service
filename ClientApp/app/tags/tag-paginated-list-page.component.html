@@ -1,0 +1,5 @@
+<ce-tag-paginated-list [tags]="tags"                           
+                           (delete)="tryToDelete($event)"
+                           (edit)="tryToEdit($event)"
+                           (filterKeyUp)="handleTagsFilterKeyUp($event)">
+</ce-tag-paginated-list>

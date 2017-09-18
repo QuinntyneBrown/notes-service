@@ -28,7 +28,7 @@ namespace NotesService.Features.Core
                 (request as BaseRequest).TenantUniqueId = TenantUniqueId;
 
             if (request.GetType().IsSubclassOf(typeof(BaseAuthenticatedRequest)))
-                (request as BaseAuthenticatedRequest).ClaimsPrincipal = User as ClaimsPrincipal;
+                (request as BaseAuthenticatedRequest).Username = User.Identity.Name;
 
             return _mediator.Send(request);
         }

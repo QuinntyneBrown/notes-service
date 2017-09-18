@@ -7,17 +7,17 @@ using System.Threading.Tasks;
 using System.Linq;
 using System.Data.Entity;
 
-namespace NotesService.Features.Notes
+namespace NotesService.Features.Tags
 {
-    public class GetByTitleAndCurrentUserQuery
+    public class GetTagByIdQuery
     {
-        public class Request : BaseAuthenticatedRequest, IRequest<Response> {
-            public string Title { get; set; }
+        public class Request : BaseRequest, IRequest<Response> { 
+            public int Id { get; set; }            
         }
 
         public class Response
         {
-            public NoteApiModel Note { get; set; }
+            public TagApiModel Tag { get; set; } 
         }
 
         public class Handler : IAsyncRequestHandler<Request, Response>
@@ -29,25 +29,19 @@ namespace NotesService.Features.Notes
             }
 
             public async Task<Response> Handle(Request request)
-            {
-                var note = await _context.Notes
-                    .Include(x => x.NoteTags)
-                    .Include("NoteTags.Tag")
-                    .Include(x => x.Tenant)
-                    .Where(x => x.Title == request.Title
-                    && x.CreatedBy == request.Username
-                    && x.Tenant.UniqueId == request.TenantUniqueId).SingleOrDefaultAsync();
-
-                if (note == null) return new Response();
-
+            {                
                 return new Response()
                 {
-                    Note = NoteApiModel.FromNote(note)
+                    Tag = TagApiModel.FromTag(await _context.Tags
+                    .Include(x => x.Tenant)				
+					.SingleAsync(x=>x.Id == request.Id &&  x.Tenant.UniqueId == request.TenantUniqueId))
                 };
             }
 
             private readonly NotesServiceContext _context;
             private readonly ICache _cache;
         }
+
     }
+
 }
