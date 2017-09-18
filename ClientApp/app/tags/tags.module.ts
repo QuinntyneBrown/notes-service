@@ -18,6 +18,7 @@ import { TagEditPageComponent } from "./tag-edit-page.component";
 import { TagListItemComponent } from "./tag-list-item.component";
 import { TagPaginatedListComponent } from "./tag-paginated-list.component";
 import { TagPaginatedListPageComponent } from "./tag-paginated-list-page.component";
+import { TagsLeftNavComponent } from "./tags-left-nav.component";
 
 export const TAG_ROUTES: Routes = [{
     path: 'tags',
@@ -55,7 +56,8 @@ const declarables = [
     TagEditPageComponent,
     TagListItemComponent,
     TagPaginatedListComponent,
-    TagPaginatedListPageComponent
+    TagPaginatedListPageComponent,
+    TagsLeftNavComponent
 ];
 
 const providers = [TagsService];

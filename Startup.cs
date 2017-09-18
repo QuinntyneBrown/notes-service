@@ -12,6 +12,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Microsoft.AspNet.SignalR;
 using NotesService.Features.Notes;
+using NotesService.Features.Tags;
 
 [assembly: OwinStartup(typeof(NotesService.Startup))]
 
@@ -30,7 +31,7 @@ namespace NotesService
 
                 var client = SubscriptionClient.CreateFromConnectionString(CoreConfiguration.Config.EventQueueConnectionString, CoreConfiguration.Config.TopicName, CoreConfiguration.Config.SubscriptionName);
                 var notesEventBusMessageHandler = container.Resolve<INotesEventBusMessageHandler>();
-
+                var tagsEventBusMessageHandler = container.Resolve<ITagsEventBusMessageHandler>();
                 client.OnMessage(message =>
                 {
                     try
@@ -45,6 +46,7 @@ namespace NotesService
                         });
 
                         notesEventBusMessageHandler.Handle(messageBodyObject);
+                        tagsEventBusMessageHandler.Handle(messageBodyObject);
 
                         GlobalHost.ConnectionManager.GetHubContext<EventHub>().Clients.All.events(messageBodyObject);
                     }

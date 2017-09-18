@@ -31,7 +31,7 @@ namespace NotesService
 
 
             container.RegisterType<Features.Notes.INotesEventBusMessageHandler, Features.Notes.NotesEventBusMessageHandler>();
-
+            container.RegisterType<Features.Tags.ITagsEventBusMessageHandler, Features.Tags.TagsEventBusMessageHandler>();
             return container;
         }
     }
