@@ -60,7 +60,7 @@ namespace NotesService.Data
                 entity.LastModifiedBy = username;
             }
         }
-
+         
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             var convention = new AttributeToTableAnnotationConvention<SoftDeleteAttribute, string>(

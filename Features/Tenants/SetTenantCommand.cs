@@ -2,9 +2,7 @@ using MediatR;
 using NotesService.Data;
 using NotesService.Features.Core;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Linq;
 using System.Data.Entity;
 using System.Net.Http;
 using Newtonsoft.Json.Linq;
@@ -42,16 +40,16 @@ namespace NotesService.Features.Tenants
 
                 var httpRequestMessage = new HttpRequestMessage()
                 {
-                    RequestUri = new Uri("http://localhost:62233/api/tenants/exists"),
+                    RequestUri = new Uri($"http://identity.quinntynebrown.com/api/tenants/exists?uniqueId={request.UniqueId}"),
                     Method = HttpMethod.Get,
                 };
 
                 httpRequestMessage.Headers.Add("Tenant", $"{request.UniqueId}");
                 
                 var httpResponseMessage = await _client.SendAsync(httpRequestMessage);
-                var response = await httpResponseMessage.Content.ReadAsAsync<TenantExistsResponse>();
+                var response = await httpResponseMessage.Content.ReadAsAsync<JObject>();
                 
-                if(response.Exists)
+                if(Convert.ToBoolean(response["exists"]))
                 {
                     tenant = new Model.Tenant() { UniqueId = request.UniqueId, Name = $"{request.UniqueId}" };
                     _context.Tenants.Add(tenant);
@@ -65,6 +63,5 @@ namespace NotesService.Features.Tenants
             private readonly NotesServiceContext _context;            
             private readonly HttpClient _client;
         }
-
     }
 }

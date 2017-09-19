@@ -17,6 +17,7 @@ namespace NotesService.Features.Tenants
 
         [Route("set")]
         [HttpPost]
+        [AllowAnonymous]
         [ResponseType(typeof(SetTenantCommand.Response))]
         public async Task<IHttpActionResult> Set(SetTenantCommand.Request request) => Ok(await Send(request));
     }
